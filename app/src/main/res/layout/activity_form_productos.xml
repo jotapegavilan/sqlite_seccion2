@@ -22,7 +22,7 @@
         android:id="@+id/txtNombreProd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="@string/hint_nom_prod"
         android:inputType="textPersonName"
@@ -87,12 +87,12 @@
         android:id="@+id/btnProd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:text="@string/btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStockProd" />
+        app:layout_constraintTop_toBottomOf="@+id/spCategoriasProd" />
 
     <Spinner
         android:id="@+id/spProductos"
@@ -103,4 +103,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnProd" />
+
+    <Spinner
+        android:id="@+id/spCategoriasProd"
+        android:layout_width="211dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtStockProd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

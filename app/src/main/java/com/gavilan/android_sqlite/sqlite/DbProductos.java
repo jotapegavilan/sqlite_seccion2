@@ -54,9 +54,7 @@ public class DbProductos extends DbHelper {
         Cursor cursor;
         cursor = bd.rawQuery("SELECT * FROM "+DB_TABLE_PRODUCTS,
                 null);
-
         DbCategorias dbcat = new DbCategorias(context);
-
         if( cursor.moveToFirst() ){
             do{
                 Categoria cat =  dbcat.obtenerCategoriaPorId(cursor.getInt(6));
