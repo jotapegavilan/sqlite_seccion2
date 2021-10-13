@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
+import com.gavilan.android_sqlite.models.Categoria;
 import com.gavilan.android_sqlite.models.Producto;
 
 import java.util.ArrayList;
@@ -27,11 +28,12 @@ public class DbProductos extends DbHelper {
         values.put("modelo", prod.getModelo());
         values.put("precio", prod.getPrecio());
         values.put("stock", prod.getStock());
+        values.put("categoria", prod.getCategoria().getId() );
         return bd.insert(DB_TABLE_PRODUCTS, null, values);
     }
 
     public long insertarProducto(String nombre, String marca, String modelo,
-                                 int precio, int stock){
+                                 int precio, int stock, int idCategoria){
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase bd = helper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -40,6 +42,7 @@ public class DbProductos extends DbHelper {
         values.put("modelo", modelo);
         values.put("precio", precio);
         values.put("stock", stock);
+        values.put("categoria", idCategoria);
         return bd.insert(DB_TABLE_PRODUCTS, null, values);
     }
 
@@ -51,8 +54,12 @@ public class DbProductos extends DbHelper {
         Cursor cursor;
         cursor = bd.rawQuery("SELECT * FROM "+DB_TABLE_PRODUCTS,
                 null);
+
+        DbCategorias dbcat = new DbCategorias(context);
+
         if( cursor.moveToFirst() ){
             do{
+                Categoria cat =  dbcat.obtenerCategoriaPorId(cursor.getInt(6));
                 // SACAR LOS REGISTROS, PONERLOS EN OBJETO Y LUEGO
                 // GUARDARLOS EN EL ARRAYLIST QUE SE RETORNARÁ
                 producto = new Producto();
@@ -62,6 +69,7 @@ public class DbProductos extends DbHelper {
                 producto.setModelo( cursor.getString(3) );
                 producto.setPrecio( cursor.getInt(4) );
                 producto.setStock( cursor.getInt(5) );
+                producto.setCategoria( cat );
                 misProductos.add(producto);
             }while (cursor.moveToNext());
             return misProductos;

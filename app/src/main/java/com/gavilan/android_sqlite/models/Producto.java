@@ -7,25 +7,36 @@ public class Producto {
     private String modelo;
     private int precio;
     private int stock;
+    private Categoria categoria;
 
     public Producto() {
     }
 
-    public Producto(String nombre, String marca, String modelo, int precio, int stock) {
+    public Producto(String nombre, String marca, String modelo, int precio, int stock, Categoria categoria) {
         this.nombre = nombre;
         this.marca = marca;
         this.modelo = modelo;
         this.precio = precio;
         this.stock = stock;
+        this.categoria = categoria;
     }
 
-    public Producto(int id, String nombre, String marca, String modelo, int precio, int stock) {
+    public Producto(int id, String nombre, String marca, String modelo, int precio, int stock, Categoria categoria) {
         this.id = id;
         this.nombre = nombre;
         this.marca = marca;
         this.modelo = modelo;
         this.precio = precio;
         this.stock = stock;
+        this.categoria = categoria;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public int getId() {

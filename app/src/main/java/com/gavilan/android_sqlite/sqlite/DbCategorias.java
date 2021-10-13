@@ -18,6 +18,26 @@ public class DbCategorias extends DbHelper {
         this.context = context;
     }
 
+    public Categoria obtenerCategoriaPorId(int id){ // 200
+        DbHelper helper = new DbHelper(context);
+        SQLiteDatabase base = helper.getReadableDatabase();
+        Categoria categoria = null;
+        Cursor cursor;
+        // Obtener la categoria que corresponda con el id entregado
+        cursor = base.rawQuery("SELECT * FROM "+DB_TABLE_CATEGORIES+" WHERE id = ?",
+                new String[] { String.valueOf( id ) });
+        // VERIFICAR SI LA CONSULTA DEVOLVIO ALGUN DATO
+        if( cursor.moveToFirst() ){
+            // LA BD Devolvio una categoría
+            categoria = new Categoria();
+            categoria.setId( cursor.getInt(0) );
+            categoria.setNombre( cursor.getString(1) );
+        }
+
+        return categoria;
+
+    }       // SELECT * FROM categorias WHERE id = 10
+
     public long insertarCategoria(String nom){
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase bd = helper.getWritableDatabase();
