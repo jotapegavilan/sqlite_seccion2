@@ -14,7 +14,7 @@ import com.gavilan.android_sqlite.models.Usuario;
 import com.gavilan.android_sqlite.sqlite.DbUsuarios;
 
 public class LoginActivity extends AppCompatActivity {
-
+    public static Usuario usuario_logeado = null;
     Button btnLogin, btnRegister;
     EditText txtEmailLogin, txtClaveLogin;
 
@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,
                             "Bienvenid@ "+userLog.getNombres()
                             , Toast.LENGTH_LONG).show();
+                    usuario_logeado = userLog;
                     Intent intent = new Intent(LoginActivity.this,
                             ProductosActivity.class);
                     startActivity(intent);

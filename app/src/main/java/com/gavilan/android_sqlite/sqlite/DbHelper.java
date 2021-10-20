@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class DbHelper extends SQLiteOpenHelper {
 
     protected static final String DB_NAME = "tiendAndroid";
-    protected static final int DB_VERSION = 5;
+    protected static final int DB_VERSION = 6;
 
     protected Context contexto;
 
@@ -51,6 +51,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE "+DB_TABLE_COMPRAS+"("+
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "fecha TEXT NOT NULL,"+
+                "pagado INTEGER NOT NULL,"+ // 1 o 0
                 "usuario INTEGER NOT NULL,"+
                 "FOREIGN KEY (usuario) REFERENCES usuarios(id))");
 
