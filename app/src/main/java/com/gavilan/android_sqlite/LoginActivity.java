@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                             "Bienvenid@ "+userLog.getNombres()
                             , Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this,
-                            FormProductos.class);
+                            ProductosActivity.class);
                     startActivity(intent);
                 }
 

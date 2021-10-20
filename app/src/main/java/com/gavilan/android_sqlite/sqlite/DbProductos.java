@@ -46,6 +46,37 @@ public class DbProductos extends DbHelper {
         return bd.insert(DB_TABLE_PRODUCTS, null, values);
     }
 
+    public ArrayList<Producto> obtenerProductos(int idCat){
+        DbHelper helper = new DbHelper(context);
+        SQLiteDatabase bd = helper.getReadableDatabase();
+        ArrayList<Producto> misProductos = new ArrayList<>();
+        Producto producto;
+        Cursor cursor;
+        cursor = bd.rawQuery("SELECT * FROM "+DB_TABLE_PRODUCTS+" WHERE categoria = ?",
+                new String[]{String.valueOf(idCat)});
+        DbCategorias dbcat = new DbCategorias(context);
+        if( cursor.moveToFirst() ){
+            do{
+                Categoria cat =  dbcat.obtenerCategoriaPorId(cursor.getInt(6));
+                // SACAR LOS REGISTROS, PONERLOS EN OBJETO Y LUEGO
+                // GUARDARLOS EN EL ARRAYLIST QUE SE RETORNARÁ
+                producto = new Producto();
+                producto.setId( cursor.getInt(0) );
+                producto.setNombre( cursor.getString(1) );
+                producto.setMarca( cursor.getString(2) );
+                producto.setModelo( cursor.getString(3) );
+                producto.setPrecio( cursor.getInt(4) );
+                producto.setStock( cursor.getInt(5) );
+                producto.setCategoria( cat );
+                misProductos.add(producto);
+            }while (cursor.moveToNext());
+            return misProductos;
+        }else{
+            return misProductos;
+        }
+
+    }
+
     public ArrayList<Producto> obtenerProductos(){
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase bd = helper.getReadableDatabase();
@@ -72,7 +103,7 @@ public class DbProductos extends DbHelper {
             }while (cursor.moveToNext());
             return misProductos;
         }else{
-            return null;
+            return misProductos;
         }
 
     }
