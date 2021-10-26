@@ -18,10 +18,19 @@
 
     <Spinner
         android:id="@+id/spCatFilter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="204dp"
+        android:layout_height="26dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnPagarCarro"
+        android:layout_width="175dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/btnPagar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

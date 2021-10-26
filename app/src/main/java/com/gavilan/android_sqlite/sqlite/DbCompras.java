@@ -2,6 +2,7 @@ package com.gavilan.android_sqlite.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
@@ -25,6 +26,19 @@ public class DbCompras extends DbHelper {
 
         return db.insert(DB_TABLE_COMPRAS, null,
                  values);
+    }
+
+    public int compraActiva(){
+        DbHelper helper = new DbHelper(contexto);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT id FROM compras WHERE pagado = 0",
+                null);
+        // pagado == 0 significa que la compra no a finalizado
+        if( cursor.moveToFirst()  ){
+            return cursor.getInt(0);
+        }else{
+            return -1; // no hay compra activa
+        }
     }
 
 }
