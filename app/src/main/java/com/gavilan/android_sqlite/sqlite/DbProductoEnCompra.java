@@ -2,6 +2,7 @@ package com.gavilan.android_sqlite.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,28 @@ public class DbProductoEnCompra extends DbHelper {
         values.put("cantidad",cantidad);
 
         return db.insert(DB_TABLE_PRODUCTO_COMPRA, null, values);
+
+    }
+
+    public int total(int compra){
+        DbHelper helper = new DbHelper(contexto);
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT producto, cantidad FROM producto_en_compra  WHERE compra = ?",
+                new String[] { String.valueOf(compra) });
+
+        DbProductos dbp = new DbProductos(contexto);
+
+        int total = 0;
+
+        if( cursor.moveToFirst()){
+            do{
+                 int precio = dbp.obtenerPrecio( cursor.getInt(0) );
+                 total+= (precio * cursor.getInt(1));
+            }while (cursor.moveToNext());
+
+        }
+        return total;
 
     }
 

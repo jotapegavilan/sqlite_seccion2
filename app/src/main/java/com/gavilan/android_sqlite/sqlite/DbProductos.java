@@ -19,6 +19,15 @@ public class DbProductos extends DbHelper {
         this.context = context;
     }
 
+    public int obtenerPrecio(int id){
+        DbHelper helper = new DbHelper(context);
+        SQLiteDatabase bd = helper.getReadableDatabase();
+        Cursor cursor = bd.rawQuery("SELECT precio FROM "+DB_TABLE_PRODUCTS+" WHERE id = ?",
+                new String[] {String.valueOf(id)});
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+
     public long insertarProducto(Producto prod){
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase bd = helper.getWritableDatabase();

@@ -51,6 +51,8 @@ public class VerProductoActivity extends AppCompatActivity {
 
         cargarSpinner(producto.getStock());
 
+
+
         btn_agregar_al_carro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +80,7 @@ public class VerProductoActivity extends AppCompatActivity {
                     dbpc.agregarProductos(producto, valor, cantidad);
                 }
 
-
+                startActivity(new Intent(getApplicationContext(), ProductosActivity.class));
             }
         });
 

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
+import com.gavilan.android_sqlite.LoginActivity;
 import com.gavilan.android_sqlite.models.Compra;
 
 public class DbCompras extends DbHelper {
@@ -28,11 +29,20 @@ public class DbCompras extends DbHelper {
                  values);
     }
 
+    public void finalizarCompra(int idCompra){
+        DbHelper helper = new DbHelper(contexto);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("pagado",1);
+        db.update(DB_TABLE_COMPRAS, values,"id = ?",
+                new String[] {String.valueOf(idCompra)} );
+    }
+
     public int compraActiva(){
         DbHelper helper = new DbHelper(contexto);
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT id FROM compras WHERE pagado = 0",
-                null);
+        Cursor cursor = db.rawQuery("SELECT id FROM compras WHERE pagado = ? and usuario = ?",
+                new String[] { String.valueOf(0), String.valueOf(LoginActivity.usuario_logeado.getId()) });
         // pagado == 0 significa que la compra no a finalizado
         if( cursor.moveToFirst()  ){
             return cursor.getInt(0);
